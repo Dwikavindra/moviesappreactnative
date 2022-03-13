@@ -17,6 +17,7 @@ import {RootStackParams} from '../../../App';
 import {getBackdropPath} from '../../../Service/MovieService';
 
 interface TrendingCardProps {
+  id: number;
   backdrop_path: string;
   title: string;
   name: string;
@@ -25,7 +26,7 @@ export default function TrendingCard(props: TrendingCardProps) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('MovieDetails');
+    navigation.navigate('MovieDetails', {id: props.id, title: props.title});
   };
   {
     return (

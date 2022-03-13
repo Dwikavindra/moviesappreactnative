@@ -23,7 +23,8 @@ export type RootStackParams = {
     id: number;
   };
   MovieDetails: {
-    imageUri: String;
+    id: number;
+    title: string;
   };
 };
 const Stack = createNativeStackNavigator<RootStackParams>();

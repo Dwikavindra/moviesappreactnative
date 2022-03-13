@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {
   SafeAreaView,
@@ -10,12 +10,18 @@ import {
   View,
   FlatList,
   Pressable,
+  Button,
 } from 'react-native';
+import {RootStackParams} from '../../App';
 
+type MoviesRouteType = RouteProp<RootStackParams, 'MovieDetails'>;
 export default function MovieDetails() {
+  const params = useRoute<MoviesRouteType>();
   return (
     <SafeAreaView>
-      <Text>Hello World</Text>
+      <Text>Hello World {params.params.id}</Text>
+      <Text>{params.params.title}</Text>
+      <Button title="Add To Favorites"></Button>
     </SafeAreaView>
   );
 }

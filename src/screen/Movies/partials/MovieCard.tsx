@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import {RootStackParams} from '../../../App';
 interface MovieCardsProps {
+  id: number;
   uri: string;
   title: string;
 }
@@ -24,7 +25,7 @@ export default function MovieCards(props: MovieCardsProps) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('MovieDetails');
+    navigation.navigate('MovieDetails', {id: props.id, title: props.title});
   };
   return (
     <Pressable onPress={handleNavigation}>

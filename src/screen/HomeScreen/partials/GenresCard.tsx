@@ -17,12 +17,14 @@ import {RootStackParams} from '../../../App';
 
 interface GenresCardProps {
   uri: string;
+  id: number;
+  title: string;
 }
 export default function GenresCard(props: GenresCardProps) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('MovieDetails');
+    navigation.navigate('MovieDetails', {id: props.id, title: props.title});
   };
   return (
     <Pressable onPress={handleNavigation}>

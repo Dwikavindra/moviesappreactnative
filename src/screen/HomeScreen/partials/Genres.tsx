@@ -91,7 +91,10 @@ export default function Genres(props: GenreProps) {
           data={genresMovies}
           horizontal
           renderItem={({item, index}) => (
-            <GenresCard uri={getPosterPath(item.poster_path)}></GenresCard>
+            <GenresCard
+              title={item.title}
+              id={item.id}
+              uri={getPosterPath(item.poster_path)}></GenresCard>
           )}></FlatList>
       </View>
     </View>

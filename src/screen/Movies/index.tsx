@@ -100,6 +100,7 @@ export default function Movies() {
         onEndReachedThreshold={0}
         renderItem={({item, index}) => (
           <MovieCards
+            id={item.id}
             uri={getPosterPath(item.poster_path)}
             title={item.title}></MovieCards>
         )}></FlatList>
