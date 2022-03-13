@@ -13,33 +13,6 @@ import {
 import Icon from 'react-native-vector-icons/Entypo';
 import {GlobalContext, FavoriteMoviesStates} from '../../context/GlobalState';
 import MovieCards from '../Movies/partials/MovieCard';
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d71',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d70',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-];
 export default function Favorites() {
   const {favorite} = useContext(GlobalContext) as FavoriteMoviesStates;
   return (

@@ -60,8 +60,8 @@ export const GlobalProvider: React.FC<React.ReactNode> = ({children}) => {
 
   useEffect(() => {
     getData();
-    console.log(movies);
-  }, []);
+  }, []); //this is the correct way of using effect when to watch movies for useEffect???
+  // watch it in the individual pages for changes
 
   let values: FavoriteMoviesStates = {
     favorite: movies,
