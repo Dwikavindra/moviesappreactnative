@@ -21,12 +21,20 @@ interface TrendingCardProps {
   backdrop_path: string;
   title: string;
   name: string;
+  poster_path: string;
+  overview: string;
 }
 export default function TrendingCard(props: TrendingCardProps) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('MovieDetails', {id: props.id, title: props.title});
+    navigation.navigate('MovieDetails', {
+      id: props.id,
+      title: props.title,
+      poster_path: props.poster_path,
+      backdrop_path: props.backdrop_path,
+      overview: props.overview,
+    });
   };
   {
     return (

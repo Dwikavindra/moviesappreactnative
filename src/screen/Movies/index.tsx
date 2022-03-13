@@ -101,8 +101,10 @@ export default function Movies() {
         renderItem={({item, index}) => (
           <MovieCards
             id={item.id}
-            uri={getPosterPath(item.poster_path)}
-            title={item.title}></MovieCards>
+            poster_path={getPosterPath(item.poster_path)}
+            title={item.title}
+            backdrop_path={item.backdrop_path}
+            overview={item.overview}></MovieCards>
         )}></FlatList>
     </SafeAreaView>
   );

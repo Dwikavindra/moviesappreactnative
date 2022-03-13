@@ -13,6 +13,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
+import {initialWindowMetrics} from 'react-native-safe-area-context';
 import {RootStackParams} from '../../../App';
 import {GenreResult} from '../../../Service/BaseService';
 import {
@@ -94,7 +95,9 @@ export default function Genres(props: GenreProps) {
             <GenresCard
               title={item.title}
               id={item.id}
-              uri={getPosterPath(item.poster_path)}></GenresCard>
+              poster_path={getPosterPath(item.poster_path)}
+              backdrop_path={item.backdrop_path}
+              overview={item.overview}></GenresCard>
           )}></FlatList>
       </View>
     </View>

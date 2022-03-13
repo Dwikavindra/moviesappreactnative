@@ -17,6 +17,7 @@ import {RootStackParams} from '../../../App';
 import {TrendingResult} from '../../../Service/BaseService';
 import {getTrending} from '../../../Service/MovieService';
 import axios from 'axios';
+import {initialWindowMetrics} from 'react-native-safe-area-context';
 export default function Trending() {
   const [trending, setTrendingMovies] = useState<TrendingResult[]>(
     [] as TrendingResult[],
@@ -38,9 +39,12 @@ export default function Trending() {
         horizontal
         renderItem={({item, index}) => (
           <TrendingCard
+            id={item.id}
             name={item.name}
             backdrop_path={item.backdrop_path}
-            title={item.title}></TrendingCard>
+            title={item.title}
+            poster_path={item.poster_path}
+            overview={item.overview}></TrendingCard>
         )}></FlatList>
     </View>
   );

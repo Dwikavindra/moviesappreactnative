@@ -18,14 +18,22 @@ import {
 import {RootStackParams} from '../../../App';
 interface MovieCardsProps {
   id: number;
-  uri: string;
   title: string;
+  backdrop_path: string;
+  poster_path: string;
+  overview: string;
 }
 export default function MovieCards(props: MovieCardsProps) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('MovieDetails', {id: props.id, title: props.title});
+    navigation.navigate('MovieDetails', {
+      id: props.id,
+      title: props.title,
+      poster_path: props.poster_path,
+      backdrop_path: props.backdrop_path,
+      overview: props.overview,
+    });
   };
   return (
     <Pressable onPress={handleNavigation}>
@@ -39,7 +47,7 @@ export default function MovieCards(props: MovieCardsProps) {
             borderRadius: 10,
           }}
           source={{
-            uri: props.uri,
+            uri: props.poster_path,
           }}></Image>
         <Text
           numberOfLines={1}
