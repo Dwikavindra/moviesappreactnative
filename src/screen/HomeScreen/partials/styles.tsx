@@ -4,7 +4,9 @@ export default StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     height: 64,
-    width: '100%',
+
+    margin: 30,
+    justifyContent: 'space-between',
   },
   headerTextContainer: {
     width: 80,

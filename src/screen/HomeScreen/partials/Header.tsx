@@ -8,11 +8,15 @@ import {
   Text,
   useColorScheme,
   View,
+  Pressable,
 } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParams} from '../../../App';
 export function Header() {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
     navigation.navigate('Favorites');
   };
@@ -22,15 +26,11 @@ export function Header() {
       <View
         style={{
           flexDirection: 'row',
-          left: '70%',
-          width: '100%',
           alignSelf: 'center',
         }}>
-        <Icon.Button
-          style={{}}
-          name="heart"
-          size={30}
-          onPress={handleNavigation}></Icon.Button>
+        <Pressable onPress={handleNavigation}>
+          <Icon style={{}} name="heart" size={30}></Icon>
+        </Pressable>
       </View>
     </View>
   );

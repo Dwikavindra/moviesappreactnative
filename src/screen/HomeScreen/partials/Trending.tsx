@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -11,6 +11,10 @@ import {
 } from 'react-native';
 import styles from './styles';
 import TrendingCard from './TrendingCard';
+
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParams} from '../../../App';
+import {Result} from '../../../Service/BaseService';
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -30,6 +34,8 @@ const DATA = [
   },
 ];
 export default function Trending() {
+  const [trending, setTrendingMovies] = useState<Result[]>([] as Result[]);
+
   return (
     <View style={styles.trendingContainer}>
       <Text style={styles.trendingText}>Trending</Text>

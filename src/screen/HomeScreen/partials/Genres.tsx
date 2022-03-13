@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {
   SafeAreaView,
@@ -11,6 +12,7 @@ import {
   FlatList,
   Pressable,
 } from 'react-native';
+import {RootStackParams} from '../../../App';
 import GenresCard from './GenresCard';
 const DATA = [
   {
@@ -36,9 +38,10 @@ interface GenreProps {
 }
 
 export default function Genres(props: GenreProps) {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('Movies');
+    navigation.navigate('Movies', {genreName: props.genre});
   };
   return (
     <View style={{flex: 1, flexDirection: `column`, marginTop: 27}}>

@@ -15,12 +15,21 @@ import {ScreenStack} from 'react-native-screens';
 import MovieDetails from './screen/MovieDetails';
 import Movies from './screen/Movies';
 import Favorites from './screen/Favorites';
-
-const Stack = createNativeStackNavigator();
+export type RootStackParams = {
+  Home: undefined;
+  Favorites: undefined;
+  Movies: {
+    genreName: string;
+  };
+  MovieDetails: {
+    imageUri: String;
+  };
+};
+const Stack = createNativeStackNavigator<RootStackParams>();
 
 const App = () => {
   return (
-    <NavigationContainer children>
+    <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{headerShown: false}}>

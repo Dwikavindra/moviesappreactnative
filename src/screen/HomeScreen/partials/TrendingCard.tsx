@@ -11,10 +11,18 @@ import {
   Image,
 } from 'react-native';
 import styles from './styles';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParams} from '../../../App';
 
 export default function TrendingCard() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
+  const handleNavigation = () => {
+    navigation.navigate('MovieDetails');
+  };
   return (
-    <Pressable style={styles.trendingCard}>
+    <Pressable onPress={handleNavigation} style={styles.trendingCard}>
       <Image
         style={styles.trendingCardImg}
         source={{
