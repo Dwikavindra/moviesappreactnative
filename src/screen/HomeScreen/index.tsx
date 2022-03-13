@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -9,25 +9,22 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {Genre} from '../../Service/BaseService';
+import {getGenre, getTrending} from '../../Service/MovieService';
 import Genres from './partials/Genres';
 import {Header} from './partials/Header';
 import Trending from './partials/Trending';
-const DATA = [
-  {
-    genrename: 'Actions',
-  },
-  {
-    genrename: 'Adventure',
-  },
-  {
-    genrename: 'Thriller',
-  },
-  {
-    genrename: 'Documentary',
-  },
-];
 
 export default function HomeScreen() {
+  const [genres, setGenres] = useState<Genre[]>([] as Genre[]);
+  useEffect(() => {
+    async function fetchData() {
+      const request = await getGenre();
+      setGenres(request);
+      return request;
+    }
+    fetchData();
+  }, []);
   return (
     <SafeAreaView style={{flex: 1, marginLeft: 5}}>
       <FlatList
@@ -37,9 +34,9 @@ export default function HomeScreen() {
             <Trending></Trending>
           </>
         }
-        data={DATA}
+        data={genres}
         renderItem={({item, index}) => (
-          <Genres genre={item.genrename}></Genres>
+          <Genres genre={item.name} id={item.id}></Genres>
         )}></FlatList>
     </SafeAreaView>
   );

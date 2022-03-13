@@ -41,11 +41,14 @@ export default function MovieCards(props: MovieCardsProps) {
             uri: props.uri,
           }}></Image>
         <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
           style={{
             fontSize: 15,
             fontWeight: '700',
             alignSelf: 'center',
             marginTop: 10,
+            overflow: 'hidden',
           }}>
           {props.title}
         </Text>

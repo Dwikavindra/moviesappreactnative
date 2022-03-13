@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -14,36 +14,33 @@ import TrendingCard from './TrendingCard';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParams} from '../../../App';
-import {Result} from '../../../Service/BaseService';
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d71',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-  },
-];
+import {TrendingResult} from '../../../Service/BaseService';
+import {getTrending} from '../../../Service/MovieService';
+import axios from 'axios';
 export default function Trending() {
-  const [trending, setTrendingMovies] = useState<Result[]>([] as Result[]);
+  const [trending, setTrendingMovies] = useState<TrendingResult[]>(
+    [] as TrendingResult[],
+  );
+  useEffect(() => {
+    async function fetchData() {
+      const request = await getTrending();
+      setTrendingMovies(request);
+      return request;
+    }
+    fetchData();
+  }, []);
 
   return (
     <View style={styles.trendingContainer}>
       <Text style={styles.trendingText}>Trending</Text>
       <FlatList
-        data={DATA}
+        data={trending}
         horizontal
         renderItem={({item, index}) => (
-          <TrendingCard></TrendingCard>
+          <TrendingCard
+            name={item.name}
+            backdrop_path={item.backdrop_path}
+            title={item.title}></TrendingCard>
         )}></FlatList>
     </View>
   );

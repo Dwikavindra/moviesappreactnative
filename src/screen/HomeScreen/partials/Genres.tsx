@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,8 +11,15 @@ import {
   View,
   FlatList,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import {RootStackParams} from '../../../App';
+import {GenreResult} from '../../../Service/BaseService';
+import {
+  getGenre,
+  getMovieBasedonGenre,
+  getPosterPath,
+} from '../../../Service/MovieService';
 import GenresCard from './GenresCard';
 const DATA = [
   {
@@ -35,13 +42,34 @@ const DATA = [
 
 interface GenreProps {
   genre: string;
+  id: number;
 }
-
+const renderLoader = () => {
+  return (
+    <>
+      <View style={{alignItems: 'center'}}>
+        <ActivityIndicator size="large" color="#aaa"></ActivityIndicator>
+        <Text>Hello</Text>
+      </View>
+    </>
+  );
+};
 export default function Genres(props: GenreProps) {
+  const [genresMovies, setGenresMovies] = useState<GenreResult[]>(
+    [] as GenreResult[],
+  );
+  useEffect(() => {
+    async function fetchData() {
+      const request = await getMovieBasedonGenre(props.id, 1);
+      setGenresMovies([...genresMovies, ...request]);
+      return request;
+    }
+    fetchData();
+  }, [1]);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const handleNavigation = () => {
-    navigation.navigate('Movies', {genreName: props.genre});
+    navigation.navigate('Movies', {genreName: props.genre, id: props.id});
   };
   return (
     <View style={{flex: 1, flexDirection: `column`, marginTop: 27}}>
@@ -60,10 +88,10 @@ export default function Genres(props: GenreProps) {
           height: 173,
         }}>
         <FlatList
-          data={DATA}
+          data={genresMovies}
           horizontal
           renderItem={({item, index}) => (
-            <GenresCard uri={item.image}></GenresCard>
+            <GenresCard uri={getPosterPath(item.poster_path)}></GenresCard>
           )}></FlatList>
       </View>
     </View>

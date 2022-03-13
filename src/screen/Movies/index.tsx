@@ -1,5 +1,5 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   SafeAreaView,
@@ -10,10 +10,14 @@ import {
   View,
   FlatList,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import {RootStackParams} from '../../App';
 import MovieCards from './partials/MovieCard';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
+import {GenreResult} from '../../Service/BaseService';
+import {getMovieBasedonGenre, getPosterPath} from '../../Service/MovieService';
+import styles from '../HomeScreen/partials/styles';
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -43,8 +47,35 @@ const DATA = [
 ];
 
 type MoviesRouteType = RouteProp<RootStackParams, 'Movies'>;
+
 export default function Movies() {
   const params = useRoute<MoviesRouteType>();
+  const [genresMovies, setGenresMovies] = useState<GenreResult[]>(
+    [] as GenreResult[],
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      const request = await getMovieBasedonGenre(params.params.id, currentPage);
+      setGenresMovies([...genresMovies, ...request]);
+
+      return request;
+    }
+    setIsLoading(true);
+    fetchData();
+    setIsLoading(false);
+  }, [currentPage]);
+  const renderLoader = () => {
+    return isLoading ? (
+      <View style={{marginVertical: 16, alignItems: 'center'}}>
+        <ActivityIndicator size="large" color="#aaa" />
+      </View>
+    ) : null;
+  };
+  const loadMoreItem = () => {
+    setCurrentPage(currentPage + 1);
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flexDirection: 'row', margin: 10}}>
@@ -62,10 +93,15 @@ export default function Movies() {
           justifyContent: 'space-evenly',
           alignItems: 'flex-start',
         }}
-        data={DATA}
+        data={genresMovies}
         numColumns={2}
+        ListFooterComponent={renderLoader}
+        onEndReached={loadMoreItem}
+        onEndReachedThreshold={0}
         renderItem={({item, index}) => (
-          <MovieCards uri={item.image} title={item.title}></MovieCards>
+          <MovieCards
+            uri={getPosterPath(item.poster_path)}
+            title={item.title}></MovieCards>
         )}></FlatList>
     </SafeAreaView>
   );

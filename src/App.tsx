@@ -20,6 +20,7 @@ export type RootStackParams = {
   Favorites: undefined;
   Movies: {
     genreName: string;
+    id: number;
   };
   MovieDetails: {
     imageUri: String;
