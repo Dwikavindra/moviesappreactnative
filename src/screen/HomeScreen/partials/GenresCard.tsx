@@ -14,6 +14,7 @@ import {
   Pressable,
 } from 'react-native';
 import {RootStackParams} from '../../../App';
+import styles from '../styles';
 
 interface GenresCardProps {
   id: number;
@@ -36,15 +37,9 @@ export default function GenresCard(props: GenresCardProps) {
   };
   return (
     <Pressable onPress={handleNavigation}>
-      <View style={{flex: 1, height: 172, width: 100, marginRight: 10}}>
+      <View style={styles.genreContainer}>
         <Image
-          style={{
-            flex: 1,
-            height: '100%',
-            width: '100%',
-            resizeMode: 'cover',
-            borderRadius: 10,
-          }}
+          style={styles.genreImage}
           source={{
             uri: props.poster_path,
           }}></Image>

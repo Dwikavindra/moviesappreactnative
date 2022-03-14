@@ -16,6 +16,7 @@ import {
   Image,
 } from 'react-native';
 import {RootStackParams} from '../../App';
+import {styles} from './styles';
 interface MovieCardsProps {
   id: number;
   title: string;
@@ -37,28 +38,13 @@ export default function MovieCards(props: MovieCardsProps) {
   };
   return (
     <Pressable onPress={handleNavigation}>
-      <View style={{flex: 1, height: 250, width: 120}}>
+      <View style={styles.ImageContainer}>
         <Image
-          style={{
-            flex: 1,
-            height: '100%',
-            width: '100%',
-            resizeMode: 'cover',
-            borderRadius: 10,
-          }}
+          style={styles.ImageCard}
           source={{
             uri: props.poster_path,
           }}></Image>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={{
-            fontSize: 15,
-            fontWeight: '700',
-            alignSelf: 'center',
-            marginTop: 10,
-            overflow: 'hidden',
-          }}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.movieTitle}>
           {props.title}
         </Text>
       </View>

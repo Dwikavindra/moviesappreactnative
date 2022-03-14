@@ -17,34 +17,7 @@ import MovieCards from '../../component/MovieCards/MovieCard';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
 import {GenreResult} from '../../Service/BaseService';
 import {getMovieBasedonGenre, getPosterPath} from '../../Service/MovieService';
-import styles from '../HomeScreen/partials/styles';
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d71',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d70',
-    image: 'https://image.tmdb.org/t/p/w500//1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-    title: 'Spiderman',
-  },
-];
+import {styles} from './styles';
 
 type MoviesRouteType = RouteProp<RootStackParams, 'Movies'>;
 
@@ -68,7 +41,7 @@ export default function Movies() {
   }, [currentPage]);
   const renderLoader = () => {
     return isLoading ? (
-      <View style={{marginVertical: 16, alignItems: 'center'}}>
+      <View style={styles.renderLoader}>
         <ActivityIndicator size="large" color="#aaa" />
       </View>
     ) : null;
@@ -77,22 +50,13 @@ export default function Movies() {
     setCurrentPage(currentPage + 1);
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flexDirection: 'row', margin: 10}}>
-        <Text style={{fontSize: 24, fontWeight: '700'}}>
-          {params.params.genreName}
-        </Text>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <View style={styles.header}>
+        <Text style={styles.headerFont}>{params.params.genreName}</Text>
       </View>
 
       <FlatList
-        columnWrapperStyle={{
-          flex: 1,
-          width: '100%',
-          margin: 10,
-          alignContent: 'space-between',
-          justifyContent: 'space-evenly',
-          alignItems: 'flex-start',
-        }}
+        columnWrapperStyle={styles.flatList}
         data={genresMovies}
         numColumns={2}
         ListFooterComponent={renderLoader}

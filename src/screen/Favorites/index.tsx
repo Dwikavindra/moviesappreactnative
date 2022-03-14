@@ -13,23 +13,13 @@ import {
 import Icon from 'react-native-vector-icons/Entypo';
 import {GlobalContext, FavoriteMoviesStates} from '../../context/GlobalState';
 import MovieCards from '../../component/MovieCards/MovieCard';
+import {styles} from './styles';
 export default function Favorites() {
   const {favorite} = useContext(GlobalContext) as FavoriteMoviesStates;
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          margin: 30,
-          justifyContent: 'space-between',
-        }}>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: '700',
-          }}>
-          Favorites
-        </Text>
+    <SafeAreaView style={styles.viewContainer}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Favorites</Text>
         <View>
           <Pressable>
             <Icon name="home" size={30}></Icon>
@@ -51,14 +41,3 @@ export default function Favorites() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  columnWrapperStyle: {
-    flex: 1,
-    width: '100%',
-    margin: 10,
-    alignContent: 'space-between',
-    justifyContent: 'space-evenly',
-    alignItems: 'flex-start',
-  },
-});

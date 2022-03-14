@@ -10,7 +10,7 @@ import {
   View,
   Image,
 } from 'react-native';
-import styles from './styles';
+import styles from '../styles';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParams} from '../../../App';

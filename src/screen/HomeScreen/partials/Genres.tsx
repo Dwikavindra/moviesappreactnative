@@ -21,6 +21,7 @@ import {
   getMovieBasedonGenre,
   getPosterPath,
 } from '../../../Service/MovieService';
+import styles from '../styles';
 import GenresCard from './GenresCard';
 const DATA = [
   {
@@ -73,21 +74,14 @@ export default function Genres(props: GenreProps) {
     navigation.navigate('Movies', {genreName: props.genre, id: props.id});
   };
   return (
-    <View style={{flex: 1, flexDirection: `column`, marginTop: 27}}>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={{fontSize: 24, fontWeight: '700'}}>{props.genre}</Text>
+    <View style={styles.genreContainerList}>
+      <View style={styles.genreHeaderButtonContainer}>
+        <Text style={styles.genreText}>{props.genre}</Text>
         <Pressable onPress={handleNavigation}>
-          <Text style={{fontSize: 24, fontWeight: '700', marginLeft: 5}}>
-            {'>'}
-          </Text>
+          <Text style={styles.genrePressable}>{'>'}</Text>
         </Pressable>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          width: '100%',
-          height: 173,
-        }}>
+      <View style={styles.genreFlatList}>
         <FlatList
           data={genresMovies}
           horizontal

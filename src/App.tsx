@@ -12,7 +12,7 @@ import HomeScreen from './screen/HomeScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ScreenStack} from 'react-native-screens';
-import MovieDetails from './screen/MovieDetails';
+import MovieDetails from './component/MovieDetails';
 import Movies from './screen/Movies';
 import Favorites from './screen/Favorites';
 import {GlobalProvider} from './context/GlobalState';

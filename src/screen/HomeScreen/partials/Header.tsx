@@ -10,7 +10,7 @@ import {
   View,
   Pressable,
 } from 'react-native';
-import styles from './styles';
+import styles from '../styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParams} from '../../../App';
