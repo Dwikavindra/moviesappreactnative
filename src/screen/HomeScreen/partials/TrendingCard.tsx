@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import styles from '../styles';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParams} from '../../../App';
 import {getBackdropPath} from '../../../Service/MovieService';
@@ -36,6 +36,7 @@ export default function TrendingCard(props: TrendingCardProps) {
       overview: props.overview,
     });
   };
+  const {colors} = useTheme();
   {
     return (
       <View style={{flexDirection: 'row'}}>
@@ -45,7 +46,7 @@ export default function TrendingCard(props: TrendingCardProps) {
             source={{
               uri: getBackdropPath(props.backdrop_path),
             }}></Image>
-          <Text style={{marginTop: 10, fontSize: 15, textAlign: 'center'}}>
+          <Text style={{...styles.trendingCardText, color: colors.text}}>
             {props.title == undefined ? props.name : props.title}
           </Text>
         </Pressable>

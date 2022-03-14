@@ -69,4 +69,9 @@ export default StyleSheet.create({
     flexDirection: `column`,
     marginTop: 27,
   },
+  trendingCardText: {
+    marginTop: 10,
+    fontSize: 15,
+    textAlign: 'center',
+  },
 });

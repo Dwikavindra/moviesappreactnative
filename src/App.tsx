@@ -38,18 +38,21 @@ const App = () => {
   const scheme = useColorScheme();
   return (
     <AppearanceProvider>
-      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen
-            name="MovieDetails"
-            component={MovieDetails}></Stack.Screen>
-          <Stack.Screen name="Movies" component={Movies}></Stack.Screen>
-          <Stack.Screen name="Favorites" component={Favorites}></Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
+      <GlobalProvider>
+        <NavigationContainer
+          theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen
+              name="MovieDetails"
+              component={MovieDetails}></Stack.Screen>
+            <Stack.Screen name="Movies" component={Movies}></Stack.Screen>
+            <Stack.Screen name="Favorites" component={Favorites}></Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </GlobalProvider>
     </AppearanceProvider>
   );
 };

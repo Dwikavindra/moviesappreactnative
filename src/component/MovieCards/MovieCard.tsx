@@ -1,4 +1,9 @@
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {
+  RouteProp,
+  useNavigation,
+  useRoute,
+  useTheme,
+} from '@react-navigation/native';
 import React from 'react';
 import type {
   NativeStackNavigationProp,
@@ -17,6 +22,7 @@ import {
 } from 'react-native';
 import {RootStackParams} from '../../App';
 import {styles} from './styles';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 interface MovieCardsProps {
   id: number;
   title: string;
@@ -36,6 +42,7 @@ export default function MovieCards(props: MovieCardsProps) {
       overview: props.overview,
     });
   };
+  const {colors} = useTheme();
   return (
     <Pressable onPress={handleNavigation}>
       <View style={styles.ImageContainer}>
@@ -44,7 +51,10 @@ export default function MovieCards(props: MovieCardsProps) {
           source={{
             uri: props.poster_path,
           }}></Image>
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.movieTitle}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={{...styles.movieTitle, color: colors.text}}>
           {props.title}
         </Text>
       </View>

@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
 import {
@@ -12,6 +12,7 @@ import {
   FlatList,
   Pressable,
   ActivityIndicator,
+  ColorPropType,
 } from 'react-native';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
 import {RootStackParams} from '../../../App';
@@ -73,12 +74,17 @@ export default function Genres(props: GenreProps) {
   const handleNavigation = () => {
     navigation.navigate('Movies', {genreName: props.genre, id: props.id});
   };
+  const {colors} = useTheme();
   return (
     <View style={styles.genreContainerList}>
       <View style={styles.genreHeaderButtonContainer}>
-        <Text style={styles.genreText}>{props.genre}</Text>
+        <Text style={{...styles.genreText, color: colors.text}}>
+          {props.genre}
+        </Text>
         <Pressable onPress={handleNavigation}>
-          <Text style={styles.genrePressable}>{'>'}</Text>
+          <Text style={{...styles.genrePressable, color: colors.text}}>
+            {'>'}
+          </Text>
         </Pressable>
       </View>
       <View style={styles.genreFlatList}>

@@ -29,6 +29,7 @@ export const GlobalProvider: React.FC<React.ReactNode> = ({children}) => {
 
   const AddMovieToFavorites = (movie: FavoriteMoviesType) => {
     let newList: FavoriteMoviesType[] = [...movies, movie];
+    console.log(newList);
     storeData(newList);
   };
   const storeData = async (value: FavoriteMoviesType[]) => {

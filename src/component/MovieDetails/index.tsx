@@ -1,4 +1,9 @@
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {
+  RouteProp,
+  useNavigation,
+  useRoute,
+  useTheme,
+} from '@react-navigation/native';
 import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
@@ -37,6 +42,7 @@ export default function MovieDetails() {
       overview: params.params.overview,
       poster_path: params.params.poster_path,
     };
+    console.log(movieAdded.id);
     addMovies(movieAdded);
   };
   const handleRemoveMovies = () => {
@@ -60,8 +66,10 @@ export default function MovieDetails() {
   useEffect(() => {
     checkFavorite();
   }, [favorite]);
+  const {colors} = useTheme();
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={{...styles.safeAreaContainer, backgroundColor: colors.background}}>
       <View style={styles.ImageBackgroundContainer}>
         <ImageBackground
           style={styles.ImageBackgroundHeight}
@@ -70,8 +78,14 @@ export default function MovieDetails() {
             uri: getBackdropPath(params.params.backdrop_path),
           }}></ImageBackground>
       </View>
-      <View style={styles.overlappingSheetContainer}>
-        <Text style={styles.title}>{params.params.title}</Text>
+      <View
+        style={{
+          ...styles.overlappingSheetContainer,
+          backgroundColor: colors.background,
+        }}>
+        <Text style={{...styles.title, color: colors.text}}>
+          {params.params.title}
+        </Text>
         <View style={styles.rowContainer}>
           <View style={styles.imageRowContainer}>
             <Image
@@ -80,7 +94,9 @@ export default function MovieDetails() {
                 uri: getPosterPath(params.params.poster_path),
               }}></Image>
           </View>
-          <Text style={styles.textRow}>{params.params.overview}</Text>
+          <Text style={{...styles.textRow, color: colors.text}}>
+            {params.params.overview}
+          </Text>
         </View>
         {isFavoriteFound == false ? (
           <Pressable style={styles.addToFavorite} onPress={handleAddMovies}>

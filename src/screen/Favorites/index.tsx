@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import React, {useContext} from 'react';
 import {
   SafeAreaView,
@@ -14,15 +14,23 @@ import Icon from 'react-native-vector-icons/Entypo';
 import {GlobalContext, FavoriteMoviesStates} from '../../context/GlobalState';
 import MovieCards from '../../component/MovieCards/MovieCard';
 import {styles} from './styles';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParams} from '../../App';
 export default function Favorites() {
   const {favorite} = useContext(GlobalContext) as FavoriteMoviesStates;
+  const {colors} = useTheme();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
+  const handleNavigation = () => {
+    navigation.navigate('Home');
+  };
   return (
     <SafeAreaView style={styles.viewContainer}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>Favorites</Text>
+        <Text style={{...styles.header, color: colors.text}}>Favorites</Text>
         <View>
-          <Pressable>
-            <Icon name="home" size={30}></Icon>
+          <Pressable onPress={handleNavigation}>
+            <Icon name="home" style={{color: colors.text}} size={30}></Icon>
           </Pressable>
         </View>
       </View>
