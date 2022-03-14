@@ -1,21 +1,22 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
+import {AppearanceProvider, useColorScheme} from 'react-native-appearance';
 import HomeScreen from './screen/HomeScreen';
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ScreenStack} from 'react-native-screens';
 import MovieDetails from './component/MovieDetails';
+import {DarkTheme} from '@react-navigation/native';
 import Movies from './screen/Movies';
 import Favorites from './screen/Favorites';
-import {GlobalProvider} from './context/GlobalState';
+import {GlobalContext, GlobalProvider} from './context/GlobalState';
 export type RootStackParams = {
   Home: undefined;
   Favorites: undefined;
@@ -34,9 +35,10 @@ export type RootStackParams = {
 const Stack = createNativeStackNavigator<RootStackParams>();
 
 const App = () => {
+  const scheme = useColorScheme();
   return (
-    <GlobalProvider>
-      <NavigationContainer>
+    <AppearanceProvider>
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{headerShown: false}}>
@@ -48,7 +50,7 @@ const App = () => {
           <Stack.Screen name="Favorites" component={Favorites}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
-    </GlobalProvider>
+    </AppearanceProvider>
   );
 };
 

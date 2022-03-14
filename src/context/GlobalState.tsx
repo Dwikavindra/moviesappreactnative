@@ -2,26 +2,27 @@ import React, {createContext, useEffect, useState} from 'react';
 
 import {FavoriteMoviesType} from './FavoriteMoviesType';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-type FavoriteAction = {
-  type: string;
-  payload: FavoriteMoviesType;
-};
+import {Appearance, ColorSchemeName} from 'react-native';
+import {Theme} from '@react-navigation/native';
 
 export type FavoriteMoviesStates = {
   favorite: FavoriteMoviesType[];
   addMovies: (movies: FavoriteMoviesType) => void;
   removeMovies: (id: number) => void;
+  colorScheme: ColorSchemeName;
 };
 const initialState: FavoriteMoviesStates = {
   favorite: [] as FavoriteMoviesType[],
   addMovies: () => {},
   removeMovies: () => {},
+  colorScheme: Appearance.getColorScheme(),
 };
 
 export const GlobalContext = createContext<FavoriteMoviesStates>(initialState);
 
 export const GlobalProvider: React.FC<React.ReactNode> = ({children}) => {
+  const colorScheme = Appearance.getColorScheme();
+  const [colorSchemeDefault, setColorScheme] = useState<ColorSchemeName>();
   const [movies, setMovies] = useState<FavoriteMoviesType[]>(
     [] as FavoriteMoviesType[],
   );
@@ -62,11 +63,18 @@ export const GlobalProvider: React.FC<React.ReactNode> = ({children}) => {
     getData();
   }, []); //this is the correct way of using effect when to watch movies for useEffect???
   // watch it in the individual pages for changes
-
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(({colorScheme}) => {
+      setColorScheme(colorScheme);
+      console.log(colorScheme as String);
+    });
+    return () => subscription.remove();
+  }, []);
   let values: FavoriteMoviesStates = {
     favorite: movies,
     addMovies: AddMovieToFavorites,
     removeMovies: removeMovies,
+    colorScheme: colorSchemeDefault,
   };
 
   return (
