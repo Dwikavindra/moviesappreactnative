@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import {GlobalContext, FavoriteMoviesStates} from '../../context/GlobalState';
-import MovieCards from '../Movies/partials/MovieCard';
+import MovieCards from '../../component/MovieCards/MovieCard';
 export default function Favorites() {
   const {favorite} = useContext(GlobalContext) as FavoriteMoviesStates;
   return (
@@ -37,14 +37,7 @@ export default function Favorites() {
         </View>
       </View>
       <FlatList
-        columnWrapperStyle={{
-          flex: 1,
-          width: '100%',
-          margin: 10,
-          alignContent: 'space-between',
-          justifyContent: 'space-evenly',
-          alignItems: 'flex-start',
-        }}
+        columnWrapperStyle={styles.columnWrapperStyle}
         data={favorite}
         numColumns={2}
         renderItem={({item, index}) => (
@@ -58,3 +51,14 @@ export default function Favorites() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  columnWrapperStyle: {
+    flex: 1,
+    width: '100%',
+    margin: 10,
+    alignContent: 'space-between',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+  },
+});

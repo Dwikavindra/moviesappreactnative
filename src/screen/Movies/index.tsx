@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {RootStackParams} from '../../App';
-import MovieCards from './partials/MovieCard';
+import MovieCards from '../../component/MovieCards/MovieCard';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
 import {GenreResult} from '../../Service/BaseService';
 import {getMovieBasedonGenre, getPosterPath} from '../../Service/MovieService';

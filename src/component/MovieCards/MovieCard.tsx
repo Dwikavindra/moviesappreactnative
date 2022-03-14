@@ -15,7 +15,7 @@ import {
   Pressable,
   Image,
 } from 'react-native';
-import {RootStackParams} from '../../../App';
+import {RootStackParams} from '../../App';
 interface MovieCardsProps {
   id: number;
   title: string;
